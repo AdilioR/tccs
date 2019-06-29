@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1558405570096.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2873775659",
+    "id" : "BF3FA0B7",
+    "lastKnownWriteTime" : 1558411422,
+    "last_content_update" : 1558411422,
+    "path" : "C:/StockMarketGit/arosa/StockMarket/scripts/Client.r",
+    "project_path" : "Client.r",
+    "properties" : {
+        "cursorPosition" : "47,3",
+        "scrollLine" : "36"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

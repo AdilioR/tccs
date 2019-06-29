@@ -1,0 +1,335 @@
+#Gráficos utilizados na avaliação experimental:
+
+setup <- function()
+{
+	source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/myGraphics.R")
+	loadlibrary("reshape")
+	loadlibrary("dplyr")
+	loadlibrary("RColorBrewer")
+	loadlibrary("gridExtra")
+
+	col_set <- brewer.pal(20, 'Spectral')
+	col_2 <- col_set[c(4,9)]
+	col_2b <- col_set[c(9,3)]    
+	col_3 <- col_set[c(4,9,11)]
+	col_4 <- col_set[c(3,5,7,9)]  
+	col_bsh <- c(col_set[c(4, 10)], "#cccccc")
+
+	plot_size(4, 3)
+
+	#Asset.TransactionList.simplelinebsh$variable <- factor(Asset.TransactionList.simplelinebsh$variable, levels = c("Buy", "Sell", "Hold"))
+	col_bsh <- c(col_set[c(4, 10)], "#cccccc")
+	
+	generate.scatterplot.series.StrategyMean <- function(dataset)
+	{
+		grf <- plot.scatter(dataset %>% filter(variable %in% c('SMA', 'MACD', 'RSI')), 
+						 colors=col_3, label_x = "Retorno médio dentro da amostra", label_y = "Retorno médio fora da amostra") 
+		grf <- grf + theme(axis.text.x = element_text(angle=0, hjust=1))
+		
+		grf <- grf + scale_fill_manual(values=c("SMA"=col_3[1], "MACD"=col_3[2], "RSI"=col_3[3]))
+
+		plot(grf)
+	}
+
+
+	generate.plot.series <- function(dataset)
+	{
+		grf <- plot.series(dataset %>% filter(variable %in% c('Buy', 'Sell', 'Hold')),colors=col_bsh) #preto, 4 e 10
+		grf <- grf + theme(axis.text.x = element_text(angle=45, hjust=1))
+		
+		plot(grf)
+	}
+
+	generate.simpleplot.series <- function(dataset)
+	{
+		grf <- simpleplot.series(dataset %>% filter(variable %in% c('transaction')),colors="black") 
+		grf <- grf + theme(axis.text.x = element_text(angle=45, hjust=1))
+		
+		plot(grf)
+	}
+
+	generate.scatterplot.series <- function(dataset)
+	{
+		grf <- plot.scatter(dataset %>% filter(variable %in% c('Buy', 'Sell', 'Hold')), 
+						 colors=col_bsh, label_x = "Data da Transação", label_y = "Preço de Fechamento Ajustado") 
+		grf <- grf + theme(axis.text.x = element_text(angle=45, hjust=1))
+		
+		grf <- grf + scale_fill_manual(values=c("Buy"=col_bsh[1], "Sell"=col_bsh[2], "Hold"=col_bsh[3]))
+
+		plot(grf)
+	}
+
+	generate.simplescatterplot.series <- function(dataset)
+	{
+		grf <- simpleplot.scatter(dataset %>% filter(variable %in% c('transaction')), 
+						 colors="black", label_x = "Data da Transação", label_y = "Preço de Fechamento Ajustado") 
+		grf <- grf + theme(axis.text.x = element_text(angle=45, hjust=1))
+		
+
+		plot(grf)
+	}
+
+
+	simpleplot.scatter <- function(series, label_series = "", label_x = "", label_y = "", colors = NULL) {
+	  grf <- ggplot(data=series) + geom_point(aes(x = x, y = value, colour=variable), size=1)
+	  if (!is.null(colors)) {
+		grf <- grf + scale_color_manual(values=colors)
+	  }
+	  grf <- grf + labs(color=label_series)
+	  grf <- grf + xlab(label_x)
+	  grf <- grf + ylab(label_y)
+	  grf <- grf + theme_bw(base_size = 10)
+	  grf <- grf + theme(panel.grid.major = element_blank()) + theme(panel.grid.minor = element_blank()) 
+	  grf <- grf + theme(legend.position = "none") + theme(legend.key = element_blank()) 
+	  return(grf)
+	}
+
+	simpleplot.series <- function(series, label_series = "", label_x = "", label_y = "", colors = NULL) {
+	  grf <- ggplot(data=series) + geom_point(aes(x = x, y = value, colour=variable), size=1.5) + geom_line(aes(x = x, y = value, colour=variable, group=variable), size=1)
+	  if (!is.null(colors)) {
+		grf <- grf + scale_color_manual(values=colors)
+	  }
+	  grf <- grf + labs(color=label_series)
+	  grf <- grf + xlab(label_x)
+	  grf <- grf + ylab(label_y)
+	  grf <- grf + theme_bw(base_size = 10)
+	  grf <- grf + theme(panel.grid.major = element_blank()) + theme(panel.grid.minor = element_blank()) 
+	  grf <- grf + theme(legend.position = "none") + theme(legend.key = element_blank()) 
+	  return(grf)
+	}
+	
+	generate.scatterplot.series.Strategy <- function(dataset, xlabel, ylabel)
+	{
+		grf <- plot.scatter(dataset %>% filter(variable %in% c('SMA', 'MACD', 'RSI')), 
+						 colors=col_3, label_x = xlabel, label_y = ylabel) 
+		grf <- grf + theme(axis.text.x = element_text(angle=0, hjust=1))
+		
+		grf <- grf + scale_fill_manual(values=c("SMA"=col_3[1], "MACD"=col_3[2], "RSI"=col_3[3]))
+
+		plot(grf)
+	}
+
+}
+
+
+#scatter com transações
+PrepareDataToVisualization <- function()
+{
+	Asset.TransactionList.simpleline <<- Asset.TransactionList
+	Asset.TransactionList.simpleline$variable <- "transaction"
+	
+	names(Asset.TransactionList.simpleline)[names(Asset.TransactionList.simpleline) == "Date"] <- "x"
+	names(Asset.TransactionList.simpleline)[names(Asset.TransactionList.simpleline) == "Adj_Close"] <- "value"
+	
+	generate.simplescatterplot.series(Asset.TransactionList.simpleline)
+	
+	
+}
+
+//figures/boxplot-abev3-fullsample-retornomediotransacao-treino.png
+newgraphics.boxplot <- function()
+{
+	#source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/myGraphics.R")
+
+	loadlibrary("reshape")
+	loadlibrary("RColorBrewer")
+	loadlibrary("gridExtra")
+	loadlibrary("dplyr")
+	
+	col.set <- brewer.pal(11, 'Spectral')
+	mycolors <- col.set[c(1,5,9)]
+	
+	dataviz_average_return_train <<- subset(Result.StrategyList, as.integer(quantity_operation_train) > 0 & as.integer(quantity_operation_test) > 0, select=c(strategy_name, mean_return_train))
+	
+	names(dataviz_average_return_train)[names(dataviz_average_return_train) == "strategy_name"] <<- "variable"
+	names(dataviz_average_return_train)[names(dataviz_average_return_train) == "mean_return_train"] <<- "value"
+	
+	#dataviz_average_return_train$variable <<- as.character(dataviz_average_return_train$variable)
+	dataviz_average_return_train$value <<- as.double(dataviz_average_return_train$value)
+	
+	as.data.frame(dataviz_average_return_train)
+	
+	grfb <<- plot.boxplot(dataviz_average_return_train, colors=mycolors, label_y="Retorno médio por transação")
+	options(repr.plot.width=4, repr.plot.height=3)
+	plot(grfb)
+}
+
+//figures/boxplot-abev3-fullsample-retornomediotransacao-teste.png
+newgraphics.boxplot <- function()
+{
+	#source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/myGraphics.R")
+
+	loadlibrary("reshape")
+	loadlibrary("RColorBrewer")
+	loadlibrary("gridExtra")
+	loadlibrary("dplyr")
+	
+	col.set <- brewer.pal(11, 'Spectral')
+	mycolors <- col.set[c(1,5,9)]
+	
+	dataviz_average_return_test <<- subset(Result.StrategyList, as.integer(quantity_operation_train) > 0 & as.integer(quantity_operation_test) > 0, select=c(strategy_name, mean_return_test))
+	
+	names(dataviz_average_return_test)[names(dataviz_average_return_test) == "strategy_name"] <<- "variable"
+	names(dataviz_average_return_test)[names(dataviz_average_return_test) == "mean_return_test"] <<- "value"
+	
+	dataviz_average_return_test$value <<- as.double(dataviz_average_return_test$value)
+	
+	as.data.frame(dataviz_average_return_test)
+	
+	grfb <<- plot.boxplot(dataviz_average_return_test, colors=mycolors, label_y="Retorno médio por transação")
+	options(repr.plot.width=4, repr.plot.height=3)
+	plot(grfb)
+}
+
+//figures/boxplot-abev3-fullsample-retornoacumulado-treino.png
+newgraphics.boxplot <- function()
+{
+	#source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/myGraphics.R")
+
+	loadlibrary("reshape")
+	loadlibrary("RColorBrewer")
+	loadlibrary("gridExtra")
+	loadlibrary("dplyr")
+	
+	col.set <- brewer.pal(11, 'Spectral')
+	mycolors <- col.set[c(1,5,9)]
+	
+	dataviz_cumulative_return_train <<- subset(Result.StrategyList, as.integer(quantity_operation_train) > 0 & as.integer(quantity_operation_test) > 0, select=c(strategy_name, cumulative_return_train))
+	
+	names(dataviz_cumulative_return_train)[names(dataviz_cumulative_return_train) == "strategy_name"] <<- "variable"
+	names(dataviz_cumulative_return_train)[names(dataviz_cumulative_return_train) == "cumulative_return_train"] <<- "value"
+	
+	dataviz_cumulative_return_train$value <<- as.double(dataviz_cumulative_return_train$value)
+	
+	as.data.frame(dataviz_cumulative_return_train)
+	
+	grfb <<- plot.boxplot(dataviz_cumulative_return_train, colors=mycolors, label_y="Retorno acumulado no período")
+	options(repr.plot.width=4, repr.plot.height=3)
+	plot(grfb)
+}
+
+//figures/boxplot-abev3-fullsample-retornoacumulado-teste.png
+newgraphics.boxplot <- function()
+{
+	#source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/myGraphics.R")
+
+	loadlibrary("reshape")
+	loadlibrary("RColorBrewer")
+	loadlibrary("gridExtra")
+	loadlibrary("dplyr")
+	
+	col.set <- brewer.pal(11, 'Spectral')
+	mycolors <- col.set[c(1,5,9)]
+	
+	dataviz_cumulative_return_test <<- subset(Result.StrategyList, as.integer(quantity_operation_test) > 0 & as.integer(quantity_operation_test) > 0, select=c(strategy_name, cumulative_return_test))
+	
+	names(dataviz_cumulative_return_test)[names(dataviz_cumulative_return_test) == "strategy_name"] <<- "variable"
+	names(dataviz_cumulative_return_test)[names(dataviz_cumulative_return_test) == "cumulative_return_test"] <<- "value"
+	
+	dataviz_cumulative_return_test$value <<- as.double(dataviz_cumulative_return_test$value)
+	
+	as.data.frame(dataviz_cumulative_return_test)
+	
+	grfb <<- plot.boxplot(dataviz_cumulative_return_test, colors=mycolors, label_y="Retorno acumulado no período")
+	options(repr.plot.width=4, repr.plot.height=3)
+	plot(grfb)
+}
+
+//figures/boxplot-abev3-sample1-sd-treino.png (não usado)
+newgraphics.boxplot <- function()
+{
+	#source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/myGraphics.R")
+
+	loadlibrary("reshape")
+	loadlibrary("RColorBrewer")
+	loadlibrary("gridExtra")
+	loadlibrary("dplyr")
+	
+	col.set <- brewer.pal(11, 'Spectral')
+	mycolors <- col.set[c(1,5,9)]
+	
+	dataviz_sd_return_train <<- subset(Result.StrategyList, as.integer(quantity_operation_train) > 0 & as.integer(quantity_operation_test) > 0 & !is.na(sd_return_train), select=c(strategy_name, sd_return_train))
+	
+	names(dataviz_sd_return_train)[names(dataviz_sd_return_train) == "strategy_name"] <<- "variable"
+	names(dataviz_sd_return_train)[names(dataviz_sd_return_train) == "sd_return_train"] <<- "value"
+	
+	dataviz_sd_return_train$value <<- as.double(dataviz_sd_return_train$value)
+	
+	as.data.frame(dataviz_sd_return_train)
+	
+	grfb <<- plot.boxplot(dataviz_sd_return_train, colors=mycolors, label_y="Desvio padrão dos retornos do período")
+	options(repr.plot.width=4, repr.plot.height=3)
+	plot(grfb)
+}
+
+//figures/boxplot-abev3-sample1-sd-teste.png (não usado)
+newgraphics.boxplot <- function()
+{
+	#source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/myGraphics.R")
+
+	loadlibrary("reshape")
+	loadlibrary("RColorBrewer")
+	loadlibrary("gridExtra")
+	loadlibrary("dplyr")
+	
+	col.set <- brewer.pal(11, 'Spectral')
+	mycolors <- col.set[c(1,9)]
+	
+	dataviz_sd_return_test <<- subset(Result.StrategyList, as.integer(quantity_operation_train) > 0 & as.integer(quantity_operation_test) > 0 & !is.na(sd_return_test), select=c(strategy_name, sd_return_test))
+	
+	names(dataviz_sd_return_test)[names(dataviz_sd_return_test) == "strategy_name"] <<- "variable"
+	names(dataviz_sd_return_test)[names(dataviz_sd_return_test) == "sd_return_test"] <<- "value"
+	
+	dataviz_sd_return_test$value <<- as.double(dataviz_sd_return_test$value)
+	
+	as.data.frame(dataviz_sd_return_test)
+	
+	grfb <<- plot.boxplot(dataviz_sd_return_test, colors=mycolors, label_y="Desvio padrão dos retornos do período")
+	options(repr.plot.width=4, repr.plot.height=3)
+	plot(grfb)
+}
+
+# scatter plot retorno medio treino x teste
+PrepareDataToVisualizationStrategyMean <- function()
+{
+	Asset.TransactionList.scatterplot <<- Result.StrategyList
+	
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "mean_return_train"] <<- "x"
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "mean_return_test"] <<- "value"
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "strategy_name"] <<- "variable"
+	
+	
+	generate.scatterplot.series.Strategy(Asset.TransactionList.scatterplot, "Retorno médio dentro da amostra", "Retorno médio fora da amostra")
+	
+}
+# scatter plot retorno acumulado treino x teste
+PrepareDataToVisualizationStrategyCumulative <- function()
+{
+	Asset.TransactionList.scatterplot <<- Result.StrategyList
+	
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "cumulative_return_train"] <<- "x"
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "cumulative_return_test"] <<- "value"
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "strategy_name"] <<- "variable"
+	
+	
+	generate.scatterplot.series.Strategy(Asset.TransactionList.scatterplot, "Retorno acumulado dentro da amostra", "Retorno acumulado fora da amostra")
+	
+}
+PrepareDataToVisualizationStrategySD <- function()
+{
+	Asset.TransactionList.scatterplot <<- Result.StrategyList
+	
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "sd_return_train"] <<- "x"
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "sd_return_test"] <<- "value"
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "strategy_name"] <<- "variable"
+	
+	
+	generate.scatterplot.series.Strategy(Asset.TransactionList.scatterplot, "Desvio padrão de retornos dentro da amostra", "Desvio padrão de retornos fora da amostra")
+	
+}
+
+	
+
+	
+
+	

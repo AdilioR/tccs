@@ -1,0 +1,47 @@
+﻿
+
+# Remove todos os objetos do workspace
+rm(list = ls())
+
+# Determina em qual diretório o working directory
+setwd("C:/StockMarket/rworkingdirectory")
+
+# Carrega biblioteca de Análise Técnica
+require(TTR)
+
+
+# -> Carrega scripts com variáveis globais e funções necessárias
+source("C:/StockMarket/scripts/GlobalVariables.R")
+
+source("C:/StockMarket/scripts/DecisionFunctions.R")
+
+source("C:/StockMarket/scripts/Simulation.R")
+# <- Carrega scripts com funções necessárias
+
+
+# Remove todos os objetos do workspace
+# Para leitura, utilize o script LeituraRData.R
+rm(list = ls())
+
+print("Concluído com sucesso.")
+print("Para leitura, utilize o script LeituraRData.R")
+
+ativo_treino <- Global.Ativo[c(1 : (round(nrow(Global.Ativo)*0.8, digits = 0))),]
+  ativo_teste <- Global.Ativo[c((round(nrow(Global.Ativo)*0.8, digits = 0) + 1) : (nrow(Global.Ativo))),]
+  
+    # Ler Global.Resumo do disco, para complementá-lo
+  if(file.exists("Resumo.rda"))
+  {
+    load("Resumo.rda")
+  }
+
+
+Result.getQuantityOperation <- function(decision_list)
+{
+	count <- table(decision_list)["Sell"]
+	if(!is.na(count))
+	{
+		return(count[["Sell"]])
+	}
+	return(0)
+}

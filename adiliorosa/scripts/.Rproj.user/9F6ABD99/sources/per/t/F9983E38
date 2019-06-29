@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1558412248990.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F9983E38",
+    "lastKnownWriteTime" : 3543822871643631918,
+    "last_content_update" : 1558412248990,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "346B0AB7",
+        "caption" : "Result.StrategyList",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=Result.StrategyList&cache_key=346B0AB7",
+        "displayedObservations" : 400,
+        "environment" : "",
+        "object" : "Result.StrategyList",
+        "preview" : 0,
+        "totalObservations" : 400,
+        "variables" : 6
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

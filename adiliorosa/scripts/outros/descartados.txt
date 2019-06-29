@@ -1,0 +1,132 @@
+garbage:
+
+##################################################### MAIN
+
+# -> Resultados comparativos
+
+# ->> Resultados levando em conta todos os períodos
+
+# Resultado <- data.frame(indicador = character(), retorno_medio = double(), percentual_acertos = double())
+# 
+# Resultado <- rbind(Resultado, cbind(indicador = "Buy and Hold", retorno_medio = mean(Resumo$retorno_buy_and_hold), percentual_acertos = 100 * (length(which(Resumo$retorno_buy_and_hold > 0))/nrow(Global.Resumo))))
+# Resultado <- rbind(Resultado, cbind(indicador = "SMA(10)", retorno_medio = mean(Resumo.SMA.10$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo.SMA.10$qtd_acertos)/(sum(Resumo.SMA.10$qtd_acertos) + sum(Resumo.SMA.10$qtd_erros) + sum(Resumo.SMA.10$qtd_breakeven)))))
+# Resultado <- rbind(Resultado, cbind(indicador = "SMA(26)", retorno_medio = mean(Resumo.SMA.26$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo.SMA.26$qtd_acertos)/(sum(Resumo.SMA.26$qtd_acertos) + sum(Resumo.SMA.26$qtd_erros) + sum(Resumo.SMA.26$qtd_breakeven)))))
+# Resultado <- rbind(Resultado, cbind(indicador = "EMA(10)", retorno_medio = mean(Resumo.EMA.10$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo.EMA.10$qtd_acertos)/(sum(Resumo.EMA.10$qtd_acertos) + sum(Resumo.EMA.10$qtd_erros) + sum(Resumo.EMA.10$qtd_breakeven)))))
+# Resultado <- rbind(Resultado, cbind(indicador = "EMA(26)", retorno_medio = mean(Resumo.EMA.26$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo.EMA.26$qtd_acertos)/(sum(Resumo.EMA.26$qtd_acertos) + sum(Resumo.EMA.26$qtd_erros) + sum(Resumo.EMA.26$qtd_breakeven)))))
+# Resultado <- rbind(Resultado, cbind(indicador = "MACD", retorno_medio = mean(Resumo.MACD$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo.MACD$qtd_acertos)/(sum(Resumo.MACD$qtd_acertos) + sum(Resumo.MACD$qtd_erros) + sum(Resumo.MACD$qtd_breakeven)))))
+# Resultado <- rbind(Resultado, cbind(indicador = "Stochastic", retorno_medio = mean(Resumo.STO$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo.STO$qtd_acertos)/(sum(Resumo.STO$qtd_acertos) + sum(Resumo.STO$qtd_erros) + sum(Resumo.STO$qtd_breakeven)))))
+# Resultado <- rbind(Resultado, cbind(indicador = "OBV", retorno_medio = mean(Resumo.OBV$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo.OBV$qtd_acertos)/(sum(Resumo.OBV$qtd_acertos) + sum(Resumo.OBV$qtd_erros) + sum(Resumo.OBV$qtd_breakeven)))))
+# Resultado <- rbind(Resultado, cbind(indicador = "RSI", retorno_medio = mean(Resumo.RSI$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo.RSI$qtd_acertos)/(sum(Resumo.RSI$qtd_acertos) + sum(Resumo.RSI$qtd_erros) + sum(Resumo.RSI$qtd_breakeven)))))
+# 
+# # <<- Resultados levando em conta todos os períodos
+# 
+# # ->> Resultados levando em conta períoods de 63 dias
+# 
+# # Resultado.63 <- data.frame(indicador = character(), retorno_medio = double(), percentual_acertos = double())
+# # 
+# # Resultado.63 <- rbind(Resultado.63, cbind(indicador = "Buy and Hold", retorno_medio = mean(Resumo63$retorno_buy_and_hold), percentual_acertos = 100 * (length(which(Resumo63$retorno_buy_and_hold > 0))/nrow(Resumo63))))
+# # Resultado.63 <- rbind(Resultado.63, cbind(indicador = "SMA(10)", retorno_medio = mean(Resumo63.SMA.10$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo63.SMA.10$qtd_acertos)/(sum(Resumo63.SMA.10$qtd_acertos) + sum(Resumo63.SMA.10$qtd_erros) + sum(Resumo63.SMA.10$qtd_breakeven)))))
+# # Resultado.63 <- rbind(Resultado.63, cbind(indicador = "SMA(26)", retorno_medio = mean(Resumo63.SMA.26$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo63.SMA.26$qtd_acertos)/(sum(Resumo63.SMA.26$qtd_acertos) + sum(Resumo63.SMA.26$qtd_erros) + sum(Resumo63.SMA.26$qtd_breakeven)))))
+# # Resultado.63 <- rbind(Resultado.63, cbind(indicador = "EMA(10)", retorno_medio = mean(Resumo63.EMA.10$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo63.EMA.10$qtd_acertos)/(sum(Resumo63.EMA.10$qtd_acertos) + sum(Resumo63.EMA.10$qtd_erros) + sum(Resumo63.EMA.10$qtd_breakeven)))))
+# # Resultado.63 <- rbind(Resultado.63, cbind(indicador = "EMA(26)", retorno_medio = mean(Resumo63.EMA.26$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo63.EMA.26$qtd_acertos)/(sum(Resumo63.EMA.26$qtd_acertos) + sum(Resumo63.EMA.26$qtd_erros) + sum(Resumo63.EMA.26$qtd_breakeven)))))
+# # Resultado.63 <- rbind(Resultado.63, cbind(indicador = "MACD", retorno_medio = mean(Resumo63.MACD$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo63.MACD$qtd_acertos)/(sum(Resumo63.MACD$qtd_acertos) + sum(Resumo63.MACD$qtd_erros) + sum(Resumo63.MACD$qtd_breakeven)))))
+# # Resultado.63 <- rbind(Resultado.63, cbind(indicador = "Stochastic", retorno_medio = mean(Resumo63.STO$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo63.STO$qtd_acertos)/(sum(Resumo63.STO$qtd_acertos) + sum(Resumo63.STO$qtd_erros) + sum(Resumo63.STO$qtd_breakeven)))))
+# # Resultado.63 <- rbind(Resultado.63, cbind(indicador = "OBV", retorno_medio = mean(Resumo63.OBV$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo63.OBV$qtd_acertos)/(sum(Resumo63.OBV$qtd_acertos) + sum(Resumo63.OBV$qtd_erros) + sum(Resumo63.OBV$qtd_breakeven)))))
+# # Resultado.63 <- rbind(Resultado.63, cbind(indicador = "RSI", retorno_medio = mean(Resumo63.RSI$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo63.RSI$qtd_acertos)/(sum(Resumo63.RSI$qtd_acertos) + sum(Resumo63.RSI$qtd_erros) + sum(Resumo63.RSI$qtd_breakeven)))))
+# # 
+# # save(Resultado.63, file = "Resultado.63.rda")
+# 
+# # <<- Resultados levando em conta períoods de 63 dias
+# 
+# # ->> Resultados levando em conta períoods de 126 dias
+# 
+# Resultado.126 <- data.frame(indicador = character(), retorno_medio = double(), percentual_acertos = double())
+# 
+# Resultado.126 <- rbind(Resultado.126, cbind(indicador = "Buy and Hold", retorno_medio = mean(Resumo126$retorno_buy_and_hold), percentual_acertos = 100 * (length(which(Resumo126$retorno_buy_and_hold > 0))/nrow(Resumo126))))
+# Resultado.126 <- rbind(Resultado.126, cbind(indicador = "SMA(10)", retorno_medio = mean(Resumo126.SMA.10$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo126.SMA.10$qtd_acertos)/(sum(Resumo126.SMA.10$qtd_acertos) + sum(Resumo126.SMA.10$qtd_erros) + sum(Resumo126.SMA.10$qtd_breakeven)))))
+# Resultado.126 <- rbind(Resultado.126, cbind(indicador = "SMA(26)", retorno_medio = mean(Resumo126.SMA.26$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo126.SMA.26$qtd_acertos)/(sum(Resumo126.SMA.26$qtd_acertos) + sum(Resumo126.SMA.26$qtd_erros) + sum(Resumo126.SMA.26$qtd_breakeven)))))
+# Resultado.126 <- rbind(Resultado.126, cbind(indicador = "EMA(10)", retorno_medio = mean(Resumo126.EMA.10$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo126.EMA.10$qtd_acertos)/(sum(Resumo126.EMA.10$qtd_acertos) + sum(Resumo126.EMA.10$qtd_erros) + sum(Resumo126.EMA.10$qtd_breakeven)))))
+# Resultado.126 <- rbind(Resultado.126, cbind(indicador = "EMA(26)", retorno_medio = mean(Resumo126.EMA.26$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo126.EMA.26$qtd_acertos)/(sum(Resumo126.EMA.26$qtd_acertos) + sum(Resumo126.EMA.26$qtd_erros) + sum(Resumo126.EMA.26$qtd_breakeven)))))
+# Resultado.126 <- rbind(Resultado.126, cbind(indicador = "MACD", retorno_medio = mean(Resumo126.MACD$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo126.MACD$qtd_acertos)/(sum(Resumo126.MACD$qtd_acertos) + sum(Resumo126.MACD$qtd_erros) + sum(Resumo126.MACD$qtd_breakeven)))))
+# Resultado.126 <- rbind(Resultado.126, cbind(indicador = "Stochastic", retorno_medio = mean(Resumo126.STO$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo126.STO$qtd_acertos)/(sum(Resumo126.STO$qtd_acertos) + sum(Resumo126.STO$qtd_erros) + sum(Resumo126.STO$qtd_breakeven)))))
+# Resultado.126 <- rbind(Resultado.126, cbind(indicador = "OBV", retorno_medio = mean(Resumo126.OBV$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo126.OBV$qtd_acertos)/(sum(Resumo126.OBV$qtd_acertos) + sum(Resumo126.OBV$qtd_erros) + sum(Resumo126.OBV$qtd_breakeven)))))
+# Resultado.126 <- rbind(Resultado.126, cbind(indicador = "RSI", retorno_medio = mean(Resumo126.RSI$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo126.RSI$qtd_acertos)/(sum(Resumo126.RSI$qtd_acertos) + sum(Resumo126.RSI$qtd_erros) + sum(Resumo126.RSI$qtd_breakeven)))))
+# 
+# save(Resultado.126, file = "Resultado.126.rda")
+# 
+# # <<- Resultados levando em conta períoods de 126 dias
+# 
+# # ->> Resultados levando em conta períoods de 252 dias
+# 
+# Resultado.252 <- data.frame(indicador = character(), retorno_medio = double(), percentual_acertos = double())
+# 
+# Resultado.252 <- rbind(Resultado.252, cbind(indicador = "Buy and Hold", retorno_medio = mean(Resumo252$retorno_buy_and_hold), percentual_acertos = 100 * (length(which(Resumo252$retorno_buy_and_hold > 0))/nrow(Resumo252))))
+# Resultado.252 <- rbind(Resultado.252, cbind(indicador = "SMA(10)", retorno_medio = mean(Resumo252.SMA.10$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo252.SMA.10$qtd_acertos)/(sum(Resumo252.SMA.10$qtd_acertos) + sum(Resumo252.SMA.10$qtd_erros) + sum(Resumo252.SMA.10$qtd_breakeven)))))
+# Resultado.252 <- rbind(Resultado.252, cbind(indicador = "SMA(26)", retorno_medio = mean(Resumo252.SMA.26$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo252.SMA.26$qtd_acertos)/(sum(Resumo252.SMA.26$qtd_acertos) + sum(Resumo252.SMA.26$qtd_erros) + sum(Resumo252.SMA.26$qtd_breakeven)))))
+# Resultado.252 <- rbind(Resultado.252, cbind(indicador = "EMA(10)", retorno_medio = mean(Resumo252.EMA.10$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo252.EMA.10$qtd_acertos)/(sum(Resumo252.EMA.10$qtd_acertos) + sum(Resumo252.EMA.10$qtd_erros) + sum(Resumo252.EMA.10$qtd_breakeven)))))
+# Resultado.252 <- rbind(Resultado.252, cbind(indicador = "EMA(26)", retorno_medio = mean(Resumo252.EMA.26$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo252.EMA.26$qtd_acertos)/(sum(Resumo252.EMA.26$qtd_acertos) + sum(Resumo252.EMA.26$qtd_erros) + sum(Resumo252.EMA.26$qtd_breakeven)))))
+# Resultado.252 <- rbind(Resultado.252, cbind(indicador = "MACD", retorno_medio = mean(Resumo252.MACD$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo252.MACD$qtd_acertos)/(sum(Resumo252.MACD$qtd_acertos) + sum(Resumo252.MACD$qtd_erros) + sum(Resumo252.MACD$qtd_breakeven)))))
+# Resultado.252 <- rbind(Resultado.252, cbind(indicador = "Stochastic", retorno_medio = mean(Resumo252.STO$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo252.STO$qtd_acertos)/(sum(Resumo252.STO$qtd_acertos) + sum(Resumo252.STO$qtd_erros) + sum(Resumo252.STO$qtd_breakeven)))))
+# Resultado.252 <- rbind(Resultado.252, cbind(indicador = "OBV", retorno_medio = mean(Resumo252.OBV$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo252.OBV$qtd_acertos)/(sum(Resumo252.OBV$qtd_acertos) + sum(Resumo252.OBV$qtd_erros) + sum(Resumo252.OBV$qtd_breakeven)))))
+# Resultado.252 <- rbind(Resultado.252, cbind(indicador = "RSI", retorno_medio = mean(Resumo252.RSI$retorno_acumulado), percentual_acertos = 100 * (sum(Resumo252.RSI$qtd_acertos)/(sum(Resumo252.RSI$qtd_acertos) + sum(Resumo252.RSI$qtd_erros) + sum(Resumo252.RSI$qtd_breakeven)))))
+# 
+# save(Resultado.252, file = "Resultado.252.rda")
+
+# <<- Resultados levando em conta períoods de 252 dias
+
+
+
+# <- Resultados comparativos
+
+##################################################################
+
+#útil? correto?
+DecisionFunctions.calculaQtdAcertos <- function(ativo)
+{
+  qtd = 0
+  for (i in 1:nrow(ativo))
+  {
+    if(!is.na(ativo$operacao[i]) && ativo$operacao[i] == "Sell")
+    {
+      if(!is.na(ativo$retorno_percentual_operacao[i]) && ativo$retorno_percentual_operacao[i] > 0)
+      {
+        qtd <- qtd + 1
+      }
+    }
+  }
+  return (qtd)
+}
+
+#útil? correto?
+DecisionFunctions.calculaQtdErros <- function(ativo)
+{
+  qtd = 0
+  for (i in 1:nrow(ativo))
+  {
+    if(!is.na(ativo$operacao[i]) && ativo$operacao[i] == "Sell")
+    {
+      if(!is.na(ativo$retorno_percentual_operacao[i]) && ativo$retorno_percentual_operacao[i] < 0)
+      {
+        qtd <- qtd + 1
+      }
+    }
+  }
+  return (qtd)
+}
+
+DecisionFunctions.calculaQtdBreakeven <- function(ativo)
+{
+  qtd = 0
+  for (i in 1:nrow(ativo))
+  {
+    if(!is.na(ativo$operacao[i]) && ativo$operacao[i] == "Sell")
+    {
+      if(!is.na(ativo$retorno_percentual_operacao[i]) && ativo$retorno_percentual_operacao[i] == 0)
+      {
+        qtd <- qtd + 1
+      }
+    }
+  }
+  return (qtd)
+}
+
