@@ -1,27 +1,20 @@
 # Remove todos os objetos do workspace
 rm(list = ls())
 
-# Configurações de diretórios do projeto
-workingDirectory <<- "C:/StockMarketGit/arosa/StockMarket/rworkingdirectory"
-scriptsDirectory <<- "C:/StockMarketGit/arosa/StockMarket/scripts/"
+#Carrega a biblioteca de análise técnica
+require(TTR)
 
-# Determina em qual diret?io o working directory
-setwd(workingDirectory)
 
-# -> Carrega scripts com vari?eis globais e fun?es necess?ias
-
-source(paste(scriptsDirectory, "Asset.R", sep = ""))
-source(paste(scriptsDirectory, "Result.R", sep = ""))
-source(paste(scriptsDirectory, "TechnicalAnalysis.R", sep = ""))
-
-source(paste(scriptsDirectory, "Main.R", sep = ""))
-source(paste(scriptsDirectory, "TechnicalAnalysis.R", sep = ""))
+source("https://raw.githubusercontent.com/AdilioR/tccs/master/adiliorosa/scripts/Asset.R")
+source("https://raw.githubusercontent.com/AdilioR/tccs/master/adiliorosa/scripts/Result.R")
+source("https://raw.githubusercontent.com/AdilioR/tccs/master/adiliorosa/scripts/TechnicalAnalysis.r")
+source("https://raw.githubusercontent.com/AdilioR/tccs/master/adiliorosa/scripts/Main.R")
 
 # Remove todos os objetos do workspace
 
 asset.name <<- "ABEV3.SA"
 
-Main.loadCsvIntoWorkspace(asset.name, csv_fullpath = "local", as.Date("1970-01-01"), header = TRUE, sep = ",")
+Main.loadCsvIntoWorkspace(asset.name, csv_fullpath = "https://raw.githubusercontent.com/AdilioR/tccs/adilio/adiliorosa/rworkingdirectory/ABEV3.SA.csv", as.Date("1970-01-01"), header = TRUE, sep = ",")
 
 setup <- function()
 {
