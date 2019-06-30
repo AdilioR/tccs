@@ -8,7 +8,7 @@ Main.loadCsvIntoWorkspace <- function(asset.name, csv_fullpath, initial_date, he
 	}
 	else
 	{
-		csv <- read.csv(text=csv_fullpath, header = header, sep = sep)
+		csv <- read.csv(text=getURL(csv_fullpath), header = header, sep = sep)
 	}
 	
 	csv <- csv[csv$Open != "null" & csv$Date != "null" & csv$Low != "null" & csv$Close != "null" & csv$Adj.Close != "null" & csv$Volume != "null",]
