@@ -2,15 +2,7 @@
 Main.loadCsvIntoWorkspace <- function(asset.name, csv_fullpath, initial_date, header = TRUE, sep = ",")
 { 
 	#Leitura csv para data.frame
-	if(csv_fullpath == "local")
-	{
-		csv <- read.csv(paste(asset.name, "csv", sep = "."), header = header, sep = sep)
-	}
-	else
-	{
-		csv <- read.csv(text=getURL(csv_fullpath), header = header, sep = sep)
-	}
-	
+  csv <- read.csv(file=csv_fullpath, header = header, sep = sep)
 	csv <- csv[csv$Open != "null" & csv$Date != "null" & csv$Low != "null" & csv$Close != "null" & csv$Adj.Close != "null" & csv$Volume != "null",]
 	Asset.New_Asset(asset.name, as.character(csv$Date), as.character(csv$Open), as.character(csv$High), as.character(csv$Low), as.character(csv$Close), as.character(csv$Adj.Close), as.character(csv$Volume), initial_date = initial_date)
 	rm(csv)
