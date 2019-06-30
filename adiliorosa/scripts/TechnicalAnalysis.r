@@ -1,5 +1,4 @@
-# Carrega biblioteca de Análise Técnica
-require(TTR)
+
 
 TechnicalAnalysis.getDecisionList.SMA <- function(nFast, nSlow)
 {	

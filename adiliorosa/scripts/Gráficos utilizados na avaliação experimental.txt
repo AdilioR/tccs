@@ -1,3 +1,104 @@
+source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/myGraphics.R")
+loadlibrary("reshape")
+loadlibrary("dplyr")
+loadlibrary("RColorBrewer")
+loadlibrary("gridExtra")
+
+col_set <- brewer.pal(11, 'Spectral')
+col_2 <- col_set[c(4,9)]
+col_2b <- col_set[c(9,3)]    
+col_3 <- col_set[c(4,9,11)]
+col_4 <- col_set[c(3,5,7,9)]  
+col_bsh <- c(col_set[c(4, 10)], "#cccccc")
+
+
+
+
+############################## DrawScatterPlotPrices ##############################
+
+DrawScatterPlotPrices <- function()
+{
+	Asset.TransactionList.simpleline <<- Asset.TransactionList
+	Asset.TransactionList.simpleline$variable <- "transaction"
+	
+	names(Asset.TransactionList.simpleline)[names(Asset.TransactionList.simpleline) == "Date"] <- "x"
+	names(Asset.TransactionList.simpleline)[names(Asset.TransactionList.simpleline) == "Adj_Close"] <- "value"
+	
+	grf <- simpleplot.scatter(Asset.TransactionList.simpleline %>% filter(variable %in% c('transaction')), 
+                     colors="black", label_x = "Data da Transação", label_y = "Preço de Fechamento Ajustado") 
+	grf <- grf + theme(axis.text.x = element_text(angle=45, hjust=1))
+	
+	plot(grf)
+
+}
+
+simpleplot.scatter <- function(series, label_series = "", label_x = "", label_y = "", colors = NULL) {
+  grf <- ggplot(data=series) + geom_point(aes(x = x, y = value, colour=variable), size=1)
+  if (!is.null(colors)) {
+    grf <- grf + scale_color_manual(values=colors)
+  }
+  grf <- grf + labs(color=label_series)
+  grf <- grf + xlab(label_x)
+  grf <- grf + ylab(label_y)
+  grf <- grf + theme_bw(base_size = 10)
+  grf <- grf + theme(panel.grid.major = element_blank()) + theme(panel.grid.minor = element_blank()) 
+  grf <- grf + theme(legend.position = "none") + theme(legend.key = element_blank()) 
+  return(grf)
+}
+
+DrawScatterPlotPrices()
+
+
+############################## DrawScatterPlotPrices ##############################
+
+
+############################## DrawBoxPlotRetornoMedio ############################
+DrawBoxPlotRetornoMedio <- function()
+{	
+
+	mycolors <- col_set[c(1,5,9)]
+	
+	dataviz_average_return_train <<- subset(Result.StrategyList, as.integer(quantity_operation_train) > 0 & as.integer(quantity_operation_test) > 0, select=c(strategy_name, mean_return_train))
+	
+	names(dataviz_average_return_train)[names(dataviz_average_return_train) == "strategy_name"] <<- "variable"
+	names(dataviz_average_return_train)[names(dataviz_average_return_train) == "mean_return_train"] <<- "value"
+	
+	#dataviz_average_return_train$variable <<- as.character(dataviz_average_return_train$variable)
+	dataviz_average_return_train$value <<- as.double(dataviz_average_return_train$value)
+	
+	as.data.frame(dataviz_average_return_train)
+	
+	grfb <<- plot.boxplot(dataviz_average_return_train, colors=mycolors, label_y="Retorno médio por transação")
+	options(repr.plot.width=4, repr.plot.height=3)
+	plot(grfb)	
+}
+DrawBoxPlotRetornoMedio()
+
+############################## DrawBoxPlotRetornoMedio ############################
+	
+############################## DrawScatterPlotRetornoMedioDentroForaAmostra ############################
+
+############################## DrawScatterPlotRetornoMedioDentroForaAmostra ############################
+	
+DrawScatterPlotRetornoMedioDentroForaAmostra <- function()
+{
+	mycolors <- col_set[c(1,5,9)]
+	
+	Asset.TransactionList.scatterplot <<- Result.StrategyList
+	
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "mean_return_train"] <<- "x"
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "mean_return_test"] <<- "value"
+	names(Asset.TransactionList.scatterplot)[names(Asset.TransactionList.scatterplot) == "strategy_name"] <<- "variable"
+	
+	grf <- plot.scatter(Asset.TransactionList.scatterplot %>% filter(variable %in% c('SMA', 'MACD', 'RSI')), 
+					 colors=mycolors, label_x = "Retorno médio dentro da amostra", label_y = "Retorno médio fora da amostra") 
+	grf <- grf + theme(axis.text.x = element_text(angle=0, hjust=1))
+
+	plot(grf)
+}
+
+DrawScatterPlotRetornoMedioDentroForaAmostra()
+
 #Gráficos utilizados na avaliação experimental:
 
 setup <- function()
@@ -129,7 +230,7 @@ PrepareDataToVisualization <- function()
 //figures/boxplot-abev3-fullsample-retornomediotransacao-treino.png
 newgraphics.boxplot <- function()
 {
-	#source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/myGraphics.R")
+	source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/myGraphics.R")
 
 	loadlibrary("reshape")
 	loadlibrary("RColorBrewer")
