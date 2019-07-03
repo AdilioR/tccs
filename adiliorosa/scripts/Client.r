@@ -80,32 +80,32 @@ start <- function(sample.name)
 	
 }
 
-#subsample1 <- Asset.TransactionList[c(1 : (round(NROW(Asset.TransactionList) * 0.25, digits = 0))),]
-#subsample2 <- Asset.TransactionList[c((round(NROW(Asset.TransactionList) * 0.25, digits = 0) + 1) : (round(NROW(Asset.TransactionList) * 0.50, digits = 0))),]
-#subsample3 <- Asset.TransactionList[c((round(NROW(Asset.TransactionList) * 0.50, digits = 0) + 1) : (round(NROW(Asset.TransactionList) * 0.75 + 1, digits = 0))),]
-#subsample4 <- Asset.TransactionList[c((round(NROW(Asset.TransactionList) * 0.75, digits = 0) + 2) : (NROW(Asset.TransactionList))),]
+subsample1 <- Asset.TransactionList[c(1 : (round(NROW(Asset.TransactionList) * 0.25, digits = 0))),]
+subsample2 <- Asset.TransactionList[c((round(NROW(Asset.TransactionList) * 0.25, digits = 0) + 1) : (round(NROW(Asset.TransactionList) * 0.50, digits = 0))),]
+subsample3 <- Asset.TransactionList[c((round(NROW(Asset.TransactionList) * 0.50, digits = 0) + 1) : (round(NROW(Asset.TransactionList) * 0.75 + 1, digits = 0))),]
+subsample4 <- Asset.TransactionList[c((round(NROW(Asset.TransactionList) * 0.75, digits = 0) + 2) : (NROW(Asset.TransactionList))),]
 
 start("FullSample")
 
-# Asset.TransactionList <- subsample1
-# rm(subsample1)
-# setup()
-# start("Subsample1")
-# 
- #Asset.TransactionList <- subsample2
- #rm(subsample2)
- #setup()
- #start("Subsample2")
-# 
-# Asset.TransactionList <- subsample3
-# rm(subsample3)
-# setup()
-# start("Subsample3")
-# 
-#  Asset.TransactionList <- subsample4
-#  rm(subsample4)
-#  setup()
-#  start("Subsample4")
+Asset.TransactionList <- subsample1
+rm(subsample1)
+setup()
+start("Subsample1")
+
+Asset.TransactionList <- subsample2
+rm(subsample2)
+setup()
+start("Subsample2")
+
+Asset.TransactionList <- subsample3
+rm(subsample3)
+setup()
+start("Subsample3")
+
+Asset.TransactionList <- subsample4
+rm(subsample4)
+setup()
+start("Subsample4")
 
 carregarDataset <- function(fileNameWithExtension)
 {
